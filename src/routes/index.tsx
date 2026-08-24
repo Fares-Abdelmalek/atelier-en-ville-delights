@@ -134,7 +134,7 @@ function Index() {
     <div className="min-h-screen bg-background">
       {/* Navigation */}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
-        <div className="container-padding mx-auto flex h-16 max-w-7xl items-center justify-between">
+        <div className="px-5 sm:px-8 lg:px-12 mx-auto flex h-16 max-w-7xl items-center justify-between">
           <a href="#accueil" className="font-serif text-xl font-semibold tracking-tight text-foreground">
             L'Atelier en Ville
           </a>
@@ -175,7 +175,7 @@ function Index() {
           </div>
 
           {/* Content side */}
-          <div className="order-1 flex flex-col justify-center container-padding lg:order-2 lg:pl-16 xl:pl-24">
+          <div className="order-1 flex flex-col justify-center px-5 sm:px-8 lg:px-12 lg:order-2 lg:pl-16 xl:pl-24">
             <div className="mx-auto w-full max-w-xl py-16 lg:py-0">
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5">
                 <span className="flex h-2 w-2 rounded-full bg-green-500" />
@@ -243,7 +243,7 @@ function Index() {
       </section>
 
       {/* About */}
-      <section className="section-padding container-padding bg-cream">
+      <section className="section-padding px-5 sm:px-8 lg:px-12 bg-cream">
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-burnt-500">À propos</p>
@@ -288,7 +288,7 @@ function Index() {
       </section>
 
       {/* Menu Highlights */}
-      <section id="menu" className="section-padding container-padding bg-background">
+      <section id="menu" className="section-padding px-5 sm:px-8 lg:px-12 bg-background">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
@@ -358,7 +358,7 @@ function Index() {
       </section>
 
       {/* Services */}
-      <section id="services" className="section-padding container-padding bg-cream">
+      <section id="services" className="section-padding px-5 sm:px-8 lg:px-12 bg-cream">
         <div className="mx-auto max-w-7xl">
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-wider text-burnt-500">Services</p>
@@ -390,7 +390,7 @@ function Index() {
       </section>
 
       {/* Reviews */}
-      <section id="avis" className="section-padding container-padding bg-background">
+      <section id="avis" className="section-padding px-5 sm:px-8 lg:px-12 bg-background">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
@@ -419,7 +419,7 @@ function Index() {
       </section>
 
       {/* Contact / Location */}
-      <section id="contact" className="section-padding container-padding bg-burnt-900 text-burnt-300">
+      <section id="contact" className="section-padding px-5 sm:px-8 lg:px-12 bg-burnt-900 text-burnt-300">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2">
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-burnt-500">Contact</p>
@@ -492,7 +492,7 @@ function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-background py-10 container-padding">
+      <footer className="border-t border-border bg-background py-10 px-5 sm:px-8 lg:px-12">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 sm:flex-row">
           <div className="text-center sm:text-left">
             <p className="font-serif text-lg font-medium text-foreground">L'Atelier en Ville</p>
