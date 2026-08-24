@@ -77,16 +77,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "L'Atelier en Ville — Restaurant à Tizi Ouzou" },
+      { name: "description", content: "L'Atelier en Ville : restaurant, café et cocktails à Tizi Ouzou. Cuisine halal, terrasse, service à table et ambiance chaleureuse." },
+      { name: "author", content: "L'Atelier en Ville" },
+      { property: "og:title", content: "L'Atelier en Ville — Restaurant à Tizi Ouzou" },
+      { property: "og:description", content: "Restaurant, café et cocktails à Tizi Ouzou. Cuisine halal, terrasse, service à table et ambiance chaleureuse." },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "L'Atelier en Ville" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@LAtelierEnVille" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,
@@ -102,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <head>
         <HeadContent />
       </head>
