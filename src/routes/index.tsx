@@ -491,23 +491,6 @@ function Index() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border bg-background py-10 px-5 sm:px-8 lg:px-12">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 sm:flex-row">
-          <div className="text-center sm:text-left">
-            <p className="font-serif text-lg font-medium text-foreground">L'Atelier en Ville</p>
-            <p className="text-sm text-muted-foreground">Restaurant · Café · Cocktails · Tizi Ouzou</p>
-          </div>
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="transition-colors hover:text-foreground">
-                {link.label}
-              </a>
-            ))}
-          </div>
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} L'Atelier en Ville.</p>
-        </div>
-      </footer>
     </div>
   );
 }
