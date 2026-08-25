@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ReviewsCarousel } from "@/components/ReviewsCarousel";
 import {
   MapPin,
   Phone,
