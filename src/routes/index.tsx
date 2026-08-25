@@ -204,19 +204,25 @@ function Index() {
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="#contact"
+                <Link
+                  to="/reservation"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
                 >
                   Réserver une table
                   <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
-                  href="#menu"
+                </Link>
+                <Link
+                  to="/commander"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-burnt-500 px-6 py-3 text-sm font-semibold text-warm-white transition-colors hover:bg-burnt-700"
+                >
+                  Commander en ligne
+                </Link>
+                <Link
+                  to="/menu"
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-input bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
                 >
                   Voir le menu
-                </a>
+                </Link>
               </div>
 
               <div className="mt-10 grid gap-4 border-t border-border pt-8 sm:grid-cols-2">
