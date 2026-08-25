@@ -391,32 +391,9 @@ function Index() {
 
       {/* Reviews */}
       <section id="avis" className="section-padding px-5 sm:px-8 lg:px-12 bg-background">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-wider text-burnt-500">Avis</p>
-              <h2 className="mt-3 font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
-                Ce que disent nos clients
-              </h2>
-            </div>
-            <div className="flex items-center gap-2 rounded-full bg-card px-4 py-2">
-              <Star className="h-5 w-5 fill-burnt-500 text-burnt-500" />
-              <span className="font-semibold text-foreground">4,1</span>
-              <span className="text-sm text-muted-foreground">sur 509 avis</span>
-            </div>
-          </div>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {reviews.map((review) => (
-              <div key={review.name} className="rounded-2xl border border-border bg-card p-6">
-                <StarRating rating={review.rating} />
-                <p className="mt-4 leading-relaxed text-foreground">"{review.text}"</p>
-                <p className="mt-4 text-sm font-semibold text-muted-foreground">{review.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        <ReviewsCarousel />
       </section>
+
 
       {/* Contact / Location */}
       <section id="contact" className="section-padding px-5 sm:px-8 lg:px-12 bg-burnt-900 text-burnt-300">
