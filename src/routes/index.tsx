@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ReviewsCarousel } from "@/components/ReviewsCarousel";
 import {
   MapPin,
   Phone,
@@ -46,13 +47,6 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const navLinks = [
-  { label: "Accueil", href: "#accueil" },
-  { label: "Menu", href: "#menu" },
-  { label: "Services", href: "#services" },
-  { label: "Avis", href: "#avis" },
-  { label: "Contact", href: "#contact" },
-];
 
 const menuHighlights = [
   {
@@ -96,71 +90,12 @@ const services = [
   { icon: Utensils, label: "Traiteur", description: "Service traiteur pour vos événements." },
 ];
 
-const reviews = [
-  {
-    name: "Amine K.",
-    rating: 5,
-    text: "Excellent rapport qualité-prix. La terrasse est magnifique et le service très attentionné.",
-  },
-  {
-    name: "Sarah B.",
-    rating: 4,
-    text: "Très bon café et desserts délicieux. Ambiance décontractée et cadre agréable.",
-  },
-  {
-    name: "Karim L.",
-    rating: 5,
-    text: "Parfait pour un dîner entre amis. Les cocktails sont excellents et la cuisine halal est bien maîtrisée.",
-  },
-];
-
-function StarRating({ rating }: { rating: number }) {
-  return (
-    <div className="flex gap-0.5" aria-label={`Note : ${rating} sur 5`}>
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className={`h-4 w-4 ${
-            i < rating ? "fill-burnt-500 text-burnt-500" : "text-muted-foreground/40"
-          }`}
-        />
-      ))}
-    </div>
-  );
-}
-
 function Index() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
-        <div className="px-5 sm:px-8 lg:px-12 mx-auto flex h-16 max-w-7xl items-center justify-between">
-          <a href="#accueil" className="font-serif text-xl font-semibold tracking-tight text-foreground">
-            L'Atelier en Ville
-          </a>
-          <nav className="hidden items-center gap-8 md:flex">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Réserver
-          </a>
-        </div>
-      </header>
-
       {/* Hero — Split Screen */}
-      <section id="accueil" className="relative min-h-screen pt-16 lg:pt-0">
-        <div className="grid min-h-[calc(100vh-4rem)] lg:min-h-screen lg:grid-cols-2">
+      <section id="accueil" className="relative">
+        <div className="grid lg:min-h-[calc(100vh-4rem)] lg:grid-cols-2">
           {/* Image side */}
           <div className="relative order-2 h-80 lg:order-1 lg:h-auto">
             <img
@@ -204,19 +139,25 @@ function Index() {
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="#contact"
+                <Link
+                  to="/reservation"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
                 >
                   Réserver une table
                   <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
-                  href="#menu"
+                </Link>
+                <Link
+                  to="/commander"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-burnt-500 px-6 py-3 text-sm font-semibold text-warm-white transition-colors hover:bg-burnt-700"
+                >
+                  Commander en ligne
+                </Link>
+                <Link
+                  to="/menu"
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-input bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
                 >
                   Voir le menu
-                </a>
+                </Link>
               </div>
 
               <div className="mt-10 grid gap-4 border-t border-border pt-8 sm:grid-cols-2">
@@ -391,32 +332,9 @@ function Index() {
 
       {/* Reviews */}
       <section id="avis" className="section-padding px-5 sm:px-8 lg:px-12 bg-background">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-wider text-burnt-500">Avis</p>
-              <h2 className="mt-3 font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
-                Ce que disent nos clients
-              </h2>
-            </div>
-            <div className="flex items-center gap-2 rounded-full bg-card px-4 py-2">
-              <Star className="h-5 w-5 fill-burnt-500 text-burnt-500" />
-              <span className="font-semibold text-foreground">4,1</span>
-              <span className="text-sm text-muted-foreground">sur 509 avis</span>
-            </div>
-          </div>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {reviews.map((review) => (
-              <div key={review.name} className="rounded-2xl border border-border bg-card p-6">
-                <StarRating rating={review.rating} />
-                <p className="mt-4 leading-relaxed text-foreground">"{review.text}"</p>
-                <p className="mt-4 text-sm font-semibold text-muted-foreground">{review.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        <ReviewsCarousel />
       </section>
+
 
       {/* Contact / Location */}
       <section id="contact" className="section-padding px-5 sm:px-8 lg:px-12 bg-burnt-900 text-burnt-300">
@@ -491,23 +409,6 @@ function Index() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border bg-background py-10 px-5 sm:px-8 lg:px-12">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 sm:flex-row">
-          <div className="text-center sm:text-left">
-            <p className="font-serif text-lg font-medium text-foreground">L'Atelier en Ville</p>
-            <p className="text-sm text-muted-foreground">Restaurant · Café · Cocktails · Tizi Ouzou</p>
-          </div>
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="transition-colors hover:text-foreground">
-                {link.label}
-              </a>
-            ))}
-          </div>
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} L'Atelier en Ville.</p>
-        </div>
-      </footer>
     </div>
   );
 }
