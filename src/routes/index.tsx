@@ -96,39 +96,6 @@ const services = [
   { icon: Utensils, label: "Traiteur", description: "Service traiteur pour vos événements." },
 ];
 
-const reviews = [
-  {
-    name: "Amine K.",
-    rating: 5,
-    text: "Excellent rapport qualité-prix. La terrasse est magnifique et le service très attentionné.",
-  },
-  {
-    name: "Sarah B.",
-    rating: 4,
-    text: "Très bon café et desserts délicieux. Ambiance décontractée et cadre agréable.",
-  },
-  {
-    name: "Karim L.",
-    rating: 5,
-    text: "Parfait pour un dîner entre amis. Les cocktails sont excellents et la cuisine halal est bien maîtrisée.",
-  },
-];
-
-function StarRating({ rating }: { rating: number }) {
-  return (
-    <div className="flex gap-0.5" aria-label={`Note : ${rating} sur 5`}>
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className={`h-4 w-4 ${
-            i < rating ? "fill-burnt-500 text-burnt-500" : "text-muted-foreground/40"
-          }`}
-        />
-      ))}
-    </div>
-  );
-}
-
 function Index() {
   return (
     <div className="min-h-screen bg-background">
