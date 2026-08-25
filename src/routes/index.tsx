@@ -132,35 +132,9 @@ function StarRating({ rating }: { rating: number }) {
 function Index() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
-        <div className="px-5 sm:px-8 lg:px-12 mx-auto flex h-16 max-w-7xl items-center justify-between">
-          <a href="#accueil" className="font-serif text-xl font-semibold tracking-tight text-foreground">
-            L'Atelier en Ville
-          </a>
-          <nav className="hidden items-center gap-8 md:flex">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Réserver
-          </a>
-        </div>
-      </header>
-
       {/* Hero — Split Screen */}
-      <section id="accueil" className="relative min-h-screen pt-16 lg:pt-0">
-        <div className="grid min-h-[calc(100vh-4rem)] lg:min-h-screen lg:grid-cols-2">
+      <section id="accueil" className="relative">
+        <div className="grid lg:min-h-[calc(100vh-4rem)] lg:grid-cols-2">
           {/* Image side */}
           <div className="relative order-2 h-80 lg:order-1 lg:h-auto">
             <img
