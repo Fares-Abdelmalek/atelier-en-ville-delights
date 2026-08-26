@@ -1,7 +1,7 @@
 import { formatDA } from "./menu";
 
 /** Numéro WhatsApp du gérant, au format international sans + ni espaces. */
-export const MANAGER_WHATSAPP = "213770000000";
+export const MANAGER_WHATSAPP = "213795160289";
 
 export function whatsappUrl(message: string) {
   return `https://wa.me/${MANAGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
