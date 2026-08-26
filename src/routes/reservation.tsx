@@ -90,7 +90,7 @@ function ReservationPage() {
     notes: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [confirmation, setConfirmation] = useState<(Values & { ref: string }) | null>(null);
+  const [confirmation, setConfirmation] = useState<(Values & { ref: string; message: string }) | null>(null);
 
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
