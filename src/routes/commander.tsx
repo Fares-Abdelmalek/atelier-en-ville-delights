@@ -119,16 +119,25 @@ function OrderPage() {
       <section className="px-5 py-20 sm:px-8 lg:px-12">
         <div className="mx-auto max-w-xl rounded-2xl border border-border bg-card p-8 text-center">
           <CheckCircle2 className="mx-auto h-12 w-12 text-burnt-500" />
-          <h1 className="mt-6 font-serif text-3xl font-medium tracking-tight text-foreground">Commande confirmée</h1>
+          <h1 className="mt-6 font-serif text-3xl font-medium tracking-tight text-foreground">Commande envoyée</h1>
           <p className="mt-3 leading-relaxed text-muted-foreground">
-            Merci ! Votre commande{" "}
-            <span className="font-semibold text-foreground">{confirmed.ref}</span> a bien été enregistrée
-            {confirmed.mode === "emporter" ? " et sera prête au comptoir" : " et sera servie à votre table"}. Notre
-            équipe vous appelle si besoin.
+            Votre commande <span className="font-semibold text-foreground">{confirmed.ref}</span> a été préparée dans
+            WhatsApp
+            {confirmed.mode === "emporter" ? " et sera prête au comptoir" : " et sera servie à votre table"}. Envoyez le
+            message au gérant pour finaliser — si WhatsApp ne s'est pas ouvert, utilisez le bouton ci-dessous.
           </p>
           <p className="mt-4 font-serif text-2xl font-medium text-foreground">{formatDA(confirmed.total)}</p>
           <p className="text-sm text-muted-foreground">Paiement à la remise de la commande.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <a
+              href={whatsappUrl(confirmed.message)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              <MessageCircle className="h-4 w-4" />
+              Ouvrir WhatsApp
+            </a>
             <Link
               to="/menu"
               className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
