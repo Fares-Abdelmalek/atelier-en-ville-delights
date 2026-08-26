@@ -95,7 +95,21 @@ function OrderPage() {
     }
     setErrors({});
     const ref = `AV-${Math.floor(1000 + Math.random() * 9000)}`;
-    setConfirmed({ ref, total, mode });
+    const message = buildOrderMessage({
+      ref,
+      mode,
+      name: parsed.data.name,
+      phone: parsed.data.phone,
+      time: parsed.data.time,
+      table: parsed.data.table,
+      notes: parsed.data.notes,
+      lines: detailed.map(({ item, qty }) => ({ name: item.name, qty, price: item.price })),
+      subtotal,
+      packaging,
+      total,
+    });
+    openWhatsApp(message);
+    setConfirmed({ ref, total, mode, message });
     clear();
     setForm({ name: "", phone: "", time: "", table: "", notes: "" });
   };
