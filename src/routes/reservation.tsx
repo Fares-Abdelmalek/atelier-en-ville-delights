@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
-import { CalendarCheck, CheckCircle2, Clock, Phone, Users } from "lucide-react";
+import { CheckCircle2, Clock, MessageCircle, Phone, Users } from "lucide-react";
+import { buildReservationMessage, openWhatsApp, whatsappUrl } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/reservation")({
   component: ReservationPage,
