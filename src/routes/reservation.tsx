@@ -173,10 +173,19 @@ function ReservationPage() {
                 .
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href={whatsappUrl(confirmation.message)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Ouvrir WhatsApp
+                </a>
                 <button
                   type="button"
                   onClick={() => setConfirmation(null)}
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                  className="inline-flex items-center gap-2 rounded-full border border-input bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
                 >
                   Nouvelle réservation
                 </button>
