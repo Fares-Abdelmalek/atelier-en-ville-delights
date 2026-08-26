@@ -377,10 +377,11 @@ function OrderPage() {
                 disabled={count === 0}
                 className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                Valider la commande
+                <MessageCircle className="h-4 w-4" />
+                Envoyer la commande sur WhatsApp
               </button>
               <p className="mt-3 text-center text-xs text-muted-foreground">
-                Paiement à la remise · en espèces ou par carte
+                Message pré-rempli envoyé au gérant · paiement à la remise
               </p>
             </form>
           </aside>
