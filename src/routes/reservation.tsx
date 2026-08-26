@@ -105,7 +105,20 @@ function ReservationPage() {
       return;
     }
     setErrors({});
-    setConfirmation({ ...parsed.data, ref: `RV-${Math.floor(1000 + Math.random() * 9000)}` });
+    const ref = `RV-${Math.floor(1000 + Math.random() * 9000)}`;
+    const message = buildReservationMessage({
+      ref,
+      name: parsed.data.name,
+      phone: parsed.data.phone,
+      email: parsed.data.email,
+      date: parsed.data.date,
+      time: parsed.data.time,
+      party: parsed.data.party,
+      occasion: parsed.data.occasion,
+      notes: parsed.data.notes,
+    });
+    openWhatsApp(message);
+    setConfirmation({ ...parsed.data, ref, message });
   };
 
   const formattedDate = (value: string) =>
