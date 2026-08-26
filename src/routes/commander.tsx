@@ -70,7 +70,12 @@ function OrderPage() {
   const { detailed, count, subtotal, mode, setMode, add, setQty, remove, clear } = useCart();
   const [form, setForm] = useState({ name: "", phone: "", time: "", table: "", notes: "" });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [confirmed, setConfirmed] = useState<{ ref: string; total: number; mode: OrderMode } | null>(null);
+  const [confirmed, setConfirmed] = useState<{
+    ref: string;
+    total: number;
+    mode: OrderMode;
+    message: string;
+  } | null>(null);
 
   const packaging = mode === "emporter" ? PACKAGING_FEE : 0;
   const total = subtotal + packaging;
