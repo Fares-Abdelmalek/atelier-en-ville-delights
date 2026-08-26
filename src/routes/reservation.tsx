@@ -150,17 +150,17 @@ function ReservationPage() {
             <div className="rounded-2xl border border-border bg-card p-8">
               <CheckCircle2 className="h-12 w-12 text-burnt-500" />
               <h2 className="mt-6 font-serif text-3xl font-medium tracking-tight text-foreground">
-                Réservation confirmée
+                Demande prête sur WhatsApp
               </h2>
               <p className="mt-3 leading-relaxed text-muted-foreground">
-                Merci {confirmation.name} ! Votre table est réservée sous la référence{" "}
-                <span className="font-semibold text-foreground">{confirmation.ref}</span>. Nous vous attendons{" "}
+                Merci {confirmation.name} ! Votre demande{" "}
+                <span className="font-semibold text-foreground">{confirmation.ref}</span> pour le{" "}
                 <span className="font-semibold text-foreground">{formattedDate(confirmation.date)}</span> à{" "}
                 <span className="font-semibold text-foreground">{confirmation.time}</span> pour{" "}
                 <span className="font-semibold text-foreground">
                   {confirmation.party} {confirmation.party > 1 ? "convives" : "convive"}
-                </span>
-                . Un rappel vous sera envoyé au {confirmation.phone}.
+                </span>{" "}
+                a été pré-remplie dans WhatsApp. Envoyez le message au gérant pour confirmer votre table.
               </p>
               {confirmation.occasion && (
                 <p className="mt-3 text-sm text-muted-foreground">Occasion notée : {confirmation.occasion}</p>
