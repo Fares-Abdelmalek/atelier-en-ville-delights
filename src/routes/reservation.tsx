@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
-import { CalendarCheck, CheckCircle2, Clock, Phone, Users } from "lucide-react";
+import { CheckCircle2, Clock, MessageCircle, Phone, Users } from "lucide-react";
+import { buildReservationMessage, openWhatsApp, whatsappUrl } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/reservation")({
   component: ReservationPage,
@@ -89,7 +90,7 @@ function ReservationPage() {
     notes: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [confirmation, setConfirmation] = useState<(Values & { ref: string }) | null>(null);
+  const [confirmation, setConfirmation] = useState<(Values & { ref: string; message: string }) | null>(null);
 
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -104,7 +105,20 @@ function ReservationPage() {
       return;
     }
     setErrors({});
-    setConfirmation({ ...parsed.data, ref: `RV-${Math.floor(1000 + Math.random() * 9000)}` });
+    const ref = `RV-${Math.floor(1000 + Math.random() * 9000)}`;
+    const message = buildReservationMessage({
+      ref,
+      name: parsed.data.name,
+      phone: parsed.data.phone,
+      email: parsed.data.email,
+      date: parsed.data.date,
+      time: parsed.data.time,
+      party: parsed.data.party,
+      occasion: parsed.data.occasion,
+      notes: parsed.data.notes,
+    });
+    openWhatsApp(message);
+    setConfirmation({ ...parsed.data, ref, message });
   };
 
   const formattedDate = (value: string) =>
@@ -136,17 +150,17 @@ function ReservationPage() {
             <div className="rounded-2xl border border-border bg-card p-8">
               <CheckCircle2 className="h-12 w-12 text-burnt-500" />
               <h2 className="mt-6 font-serif text-3xl font-medium tracking-tight text-foreground">
-                Réservation confirmée
+                Demande prête sur WhatsApp
               </h2>
               <p className="mt-3 leading-relaxed text-muted-foreground">
-                Merci {confirmation.name} ! Votre table est réservée sous la référence{" "}
-                <span className="font-semibold text-foreground">{confirmation.ref}</span>. Nous vous attendons{" "}
+                Merci {confirmation.name} ! Votre demande{" "}
+                <span className="font-semibold text-foreground">{confirmation.ref}</span> pour le{" "}
                 <span className="font-semibold text-foreground">{formattedDate(confirmation.date)}</span> à{" "}
                 <span className="font-semibold text-foreground">{confirmation.time}</span> pour{" "}
                 <span className="font-semibold text-foreground">
                   {confirmation.party} {confirmation.party > 1 ? "convives" : "convive"}
-                </span>
-                . Un rappel vous sera envoyé au {confirmation.phone}.
+                </span>{" "}
+                a été pré-remplie dans WhatsApp. Envoyez le message au gérant pour confirmer votre table.
               </p>
               {confirmation.occasion && (
                 <p className="mt-3 text-sm text-muted-foreground">Occasion notée : {confirmation.occasion}</p>
@@ -159,10 +173,19 @@ function ReservationPage() {
                 .
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href={whatsappUrl(confirmation.message)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Ouvrir WhatsApp
+                </a>
                 <button
                   type="button"
                   onClick={() => setConfirmation(null)}
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                  className="inline-flex items-center gap-2 rounded-full border border-input bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
                 >
                   Nouvelle réservation
                 </button>
@@ -287,8 +310,8 @@ function ReservationPage() {
                 type="submit"
                 className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
               >
-                <CalendarCheck className="h-4 w-4" />
-                Confirmer la réservation
+                <MessageCircle className="h-4 w-4" />
+                Envoyer la demande sur WhatsApp
               </button>
             </form>
           )}
