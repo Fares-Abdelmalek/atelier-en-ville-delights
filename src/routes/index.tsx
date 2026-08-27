@@ -97,13 +97,11 @@ function Index() {
         <div className="grid lg:min-h-[calc(100vh-4rem)] lg:grid-cols-2">
           {/* Image side */}
           <div className="relative order-2 h-80 lg:order-1 lg:h-auto">
-            <img
-              src={restaurantInterior}
-              alt="Intérieur chaleureux du restaurant L'Atelier en Ville"
+            <ResponsiveImage
+              image={restaurantInteriorImage}
+              sizes="(min-width: 1024px) 50vw, 100vw"
               className="absolute inset-0 h-full w-full object-cover"
-              width={1280}
-              height={960}
-              loading="eager"
+              priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-burnt-900/40 to-transparent lg:bg-gradient-to-r" />
           </div>
