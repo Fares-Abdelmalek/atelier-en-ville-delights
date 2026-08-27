@@ -19,12 +19,9 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-import restaurantInteriorAsset from "../assets/restaurant-interior.jpg.asset.json";
 import foodSpread from "../assets/food-spread.jpg";
-import terraceAsset from "../assets/terrace.jpg.asset.json";
-
-const restaurantInterior = restaurantInteriorAsset.url;
-const terrace = terraceAsset.url;
+import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { restaurantInteriorImage, terraceImage } from "@/lib/images";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -101,13 +98,11 @@ function Index() {
         <div className="grid lg:min-h-[calc(100vh-4rem)] lg:grid-cols-2">
           {/* Image side */}
           <div className="relative order-2 h-80 lg:order-1 lg:h-auto">
-            <img
-              src={restaurantInterior}
-              alt="Intérieur chaleureux du restaurant L'Atelier en Ville"
+            <ResponsiveImage
+              image={restaurantInteriorImage}
+              sizes="(min-width: 1024px) 50vw, 100vw"
               className="absolute inset-0 h-full w-full object-cover"
-              width={1280}
-              height={960}
-              loading="eager"
+              priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-burnt-900/40 to-transparent lg:bg-gradient-to-r" />
           </div>
@@ -219,13 +214,10 @@ function Index() {
             </div>
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-            <img
-              src={terrace}
-              alt="Terrasse du restaurant L'Atelier en Ville au coucher du soleil"
-              className="h-full w-full object-cover"
-              width={1280}
-              height={960}
-              loading="lazy"
+            <ResponsiveImage
+              image={terraceImage}
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
         </div>
