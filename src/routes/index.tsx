@@ -19,12 +19,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-import restaurantInteriorAsset from "../assets/restaurant-interior.jpg.asset.json";
-import foodSpread from "../assets/food-spread.jpg";
-import terraceAsset from "../assets/terrace.jpg.asset.json";
-
-const restaurantInterior = restaurantInteriorAsset.url;
-const terrace = terraceAsset.url;
+import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { restaurantInteriorImage, terraceImage } from "@/lib/images";
 
 export const Route = createFileRoute("/")({
   component: Index,
