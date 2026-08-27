@@ -19,9 +19,12 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-import restaurantInterior from "../assets/restaurant-interior.jpg";
+import restaurantInteriorAsset from "../assets/restaurant-interior.jpg.asset.json";
 import foodSpread from "../assets/food-spread.jpg";
-import terrace from "../assets/terrace.jpg";
+import terraceAsset from "../assets/terrace.jpg.asset.json";
+
+const restaurantInterior = restaurantInteriorAsset.url;
+const terrace = terraceAsset.url;
 
 export const Route = createFileRoute("/")({
   component: Index,
