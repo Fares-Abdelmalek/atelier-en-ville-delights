@@ -213,13 +213,10 @@ function Index() {
             </div>
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-            <img
-              src={terrace}
-              alt="Terrasse du restaurant L'Atelier en Ville au coucher du soleil"
-              className="h-full w-full object-cover"
-              width={1280}
-              height={960}
-              loading="lazy"
+            <ResponsiveImage
+              image={terraceImage}
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
         </div>
