@@ -19,6 +19,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+import foodSpread from "../assets/food-spread.jpg";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
 import { restaurantInteriorImage, terraceImage } from "@/lib/images";
 
