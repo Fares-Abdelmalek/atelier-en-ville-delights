@@ -1,10 +1,28 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
-import { Minus, Plus, Trash2, ShoppingBag, CheckCircle2, ShoppingCart, Store, MessageCircle } from "lucide-react";
+import {
+  Minus,
+  Plus,
+  Trash2,
+  ShoppingBag,
+  CheckCircle2,
+  ShoppingCart,
+  Store,
+  MessageCircle,
+  Copy,
+} from "lucide-react";
+import { toast } from "sonner";
 import { formatDA, menuItems } from "@/lib/menu";
 import { useCart, type OrderMode } from "@/lib/cart";
 import { buildOrderMessage, openWhatsApp, whatsappUrl } from "@/lib/whatsapp";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/commander")({
   component: OrderPage,
