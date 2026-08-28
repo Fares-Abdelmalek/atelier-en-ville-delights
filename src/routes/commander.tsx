@@ -69,6 +69,21 @@ const checkoutSchema = z.object({
 
 type FormErrors = Partial<Record<keyof z.infer<typeof checkoutSchema>, string>>;
 
+type OrderPreview = {
+  ref: string;
+  mode: OrderMode;
+  name: string;
+  phone: string;
+  time: string;
+  table?: string | undefined;
+  notes?: string | undefined;
+  lines: { name: string; qty: number; price: number }[];
+  subtotal: number;
+  packaging: number;
+  total: number;
+  message: string;
+};
+
 const modes: { id: OrderMode; label: string; description: string; icon: typeof ShoppingBag }[] = [
   {
     id: "emporter",
