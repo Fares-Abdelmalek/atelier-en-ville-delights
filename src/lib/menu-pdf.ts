@@ -1,5 +1,8 @@
 import { formatDA, menuCategories, menuItems } from "./menu";
 
+/** jsPDF (WinAnsi) ne connaît pas les espaces fines insécables : on les normalise. */
+const pdfText = (value: string) => value.replace(/[\u202f\u00a0\u2009]/g, " ");
+
 const MARGIN = 44;
 const PAGE_W = 595.28; // A4 portrait
 const PAGE_H = 841.89;
@@ -59,7 +62,7 @@ export async function buildMenuPdf() {
     y += 22;
 
     for (const item of items) {
-      const priceText = formatDA(item.price);
+      const priceText = pdfText(formatDA(item.price));
       doc.setFont("helvetica", "bold");
       doc.setFontSize(10);
       const priceW = doc.getTextWidth(priceText);
