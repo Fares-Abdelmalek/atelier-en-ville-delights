@@ -94,6 +94,7 @@ function OrderPage() {
     mode: OrderMode;
     message: string;
   } | null>(null);
+  const [preview, setPreview] = useState<OrderPreview | null>(null);
 
   const packaging = mode === "emporter" ? PACKAGING_FEE : 0;
   const total = subtotal + packaging;
