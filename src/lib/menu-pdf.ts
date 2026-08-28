@@ -7,8 +7,8 @@ const BURNT: [number, number, number] = [176, 84, 46];
 const INK: [number, number, number] = [38, 32, 28];
 const MUTED: [number, number, number] = [122, 112, 104];
 
-/** Génère et télécharge le menu complet en PDF (A4, plusieurs pages). */
-export async function downloadMenuPdf(fileName = "menu-atelier-en-ville.pdf") {
+/** Construit le document PDF du menu complet (A4, plusieurs pages). */
+export async function buildMenuPdf() {
   const { jsPDF } = await import("jspdf");
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const contentW = PAGE_W - MARGIN * 2;
@@ -100,5 +100,11 @@ export async function downloadMenuPdf(fileName = "menu-atelier-en-ville.pdf") {
     doc.text(`Page ${p} / ${pages}`, PAGE_W - MARGIN, PAGE_H - 26, { align: "right" });
   }
 
+  return doc;
+}
+
+/** Génère et télécharge le menu complet en PDF. */
+export async function downloadMenuPdf(fileName = "menu-atelier-en-ville.pdf") {
+  const doc = await buildMenuPdf();
   doc.save(fileName);
 }
