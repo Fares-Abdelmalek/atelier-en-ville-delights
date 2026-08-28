@@ -99,6 +99,18 @@ function MenuPage() {
             et ajoutez vos envies au panier pour une commande à emporter ou sur place.
           </p>
 
+          <div className="mt-6 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={handleDownloadPdf}
+              disabled={pdfLoading}
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60"
+            >
+              {pdfLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+              Télécharger le menu (PDF)
+            </button>
+          </div>
+
           <div className="mt-8 flex flex-wrap items-center gap-2">
             <span className="mr-1 text-sm font-medium text-foreground">Filtres :</span>
             {filterTags.map((tag) => {
