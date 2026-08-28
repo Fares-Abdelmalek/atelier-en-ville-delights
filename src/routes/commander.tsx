@@ -99,6 +99,7 @@ function OrderPage() {
   const total = subtotal + packaging;
   const suggestions = menuItems.filter((item) => !detailed.some((l) => l.item.id === item.id)).slice(0, 4);
 
+  // Étape d'aperçu : le message WhatsApp est généré depuis le panier avant tout envoi.
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
     const parsed = checkoutSchema.safeParse(form);
@@ -113,7 +114,8 @@ function OrderPage() {
     }
     setErrors({});
     const ref = `AV-${Math.floor(1000 + Math.random() * 9000)}`;
-    const message = buildOrderMessage({
+    const lines = detailed.map(({ item, qty }) => ({ name: item.name, qty, price: item.price }));
+    const payload = {
       ref,
       mode,
       name: parsed.data.name,
@@ -121,15 +123,31 @@ function OrderPage() {
       time: parsed.data.time,
       table: parsed.data.table,
       notes: parsed.data.notes,
-      lines: detailed.map(({ item, qty }) => ({ name: item.name, qty, price: item.price })),
+      lines,
       subtotal,
       packaging,
       total,
-    });
-    openWhatsApp(message);
-    setConfirmed({ ref, total, mode, message });
+    };
+    setPreview({ ...payload, message: buildOrderMessage(payload) });
+  };
+
+  const confirmSend = () => {
+    if (!preview) return;
+    openWhatsApp(preview.message);
+    setConfirmed({ ref: preview.ref, total: preview.total, mode: preview.mode, message: preview.message });
+    setPreview(null);
     clear();
     setForm({ name: "", phone: "", time: "", table: "", notes: "" });
+  };
+
+  const copyMessage = async () => {
+    if (!preview) return;
+    try {
+      await navigator.clipboard.writeText(preview.message);
+      toast.success("Message copié");
+    } catch {
+      toast.error("Copie impossible sur cet appareil.");
+    }
   };
 
   if (confirmed) {
