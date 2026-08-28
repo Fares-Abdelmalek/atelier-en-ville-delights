@@ -56,6 +56,19 @@ function MenuPage() {
   const { add } = useCart();
   const [activeTags, setActiveTags] = useState<DietTag[]>([]);
   const [selected, setSelected] = useState<MenuItem | null>(null);
+  const [pdfLoading, setPdfLoading] = useState(false);
+
+  const handleDownloadPdf = async () => {
+    setPdfLoading(true);
+    try {
+      await downloadMenuPdf();
+      toast.success("Menu PDF téléchargé");
+    } catch {
+      toast.error("Le PDF n'a pas pu être généré. Réessayez.");
+    } finally {
+      setPdfLoading(false);
+    }
+  };
 
   const filtered = useMemo(
     () =>
