@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Plus, Info, ShoppingBag } from "lucide-react";
+import { Plus, Info, ShoppingBag, Download, Loader2 } from "lucide-react";
+import { downloadMenuPdf } from "@/lib/menu-pdf";
 import {
   dietTagLabels,
   formatDA,
