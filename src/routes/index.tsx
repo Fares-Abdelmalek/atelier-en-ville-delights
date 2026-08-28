@@ -50,30 +50,31 @@ export const Route = createFileRoute("/")({
 
 const menuHighlights = [
   {
-    title: "Couscous Royal",
-    description: "Couscous aux légumes de saison, viandes grillées et sauce parfumée.",
-    price: "1 200 DA",
-    tag: "Plat",
+    title: "Burger Atelier",
+    description: "Salade, tomate, fromage, viande, chicken, oignon caramélisé, avocat, sauce barbecue.",
+    price: "1 650 DA",
+    tag: "Burger",
   },
   {
-    title: "Tagine d'Agneau",
-    description: "Tendre agneau mijoté aux pruneaux, amandes et épices douces.",
-    price: "1 500 DA",
-    tag: "Spécialité",
+    title: "Assiette Carnivore",
+    description: "Assortiment de viandes grillées à partager, toutes halal.",
+    price: "3 000 DA",
+    tag: "Viandes",
   },
   {
-    title: "Café Crème",
-    description: "Notre café signature, onctueux et parfaitement corsé.",
-    price: "250 DA",
-    tag: "Café",
+    title: "Salade Royale Atelier",
+    description: "Avocat, saumon, champignons, cœur de palmier, asperges, mozzarella.",
+    price: "1 900 DA",
+    tag: "Entrée",
   },
   {
-    title: "Cocktail Maison",
-    description: "Mélange fruité et rafraîchissant préparé par nos barmen.",
-    price: "650 DA",
-    tag: "Cocktail",
+    title: "Milk-Shake Atelier",
+    description: "Figue, datte et fruits secs, préparé minute.",
+    price: "750 DA",
+    tag: "Milk-shake",
   },
 ];
+
 
 const services = [
   { icon: Utensils, label: "Repas sur place", description: "Service à table dans un cadre chaleureux." },
