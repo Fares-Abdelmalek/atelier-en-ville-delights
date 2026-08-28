@@ -1,10 +1,28 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
-import { Minus, Plus, Trash2, ShoppingBag, CheckCircle2, ShoppingCart, Store, MessageCircle } from "lucide-react";
+import {
+  Minus,
+  Plus,
+  Trash2,
+  ShoppingBag,
+  CheckCircle2,
+  ShoppingCart,
+  Store,
+  MessageCircle,
+  Copy,
+} from "lucide-react";
+import { toast } from "sonner";
 import { formatDA, menuItems } from "@/lib/menu";
 import { useCart, type OrderMode } from "@/lib/cart";
 import { buildOrderMessage, openWhatsApp, whatsappUrl } from "@/lib/whatsapp";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/commander")({
   component: OrderPage,
@@ -51,6 +69,21 @@ const checkoutSchema = z.object({
 
 type FormErrors = Partial<Record<keyof z.infer<typeof checkoutSchema>, string>>;
 
+type OrderPreview = {
+  ref: string;
+  mode: OrderMode;
+  name: string;
+  phone: string;
+  time: string;
+  table?: string | undefined;
+  notes?: string | undefined;
+  lines: { name: string; qty: number; price: number }[];
+  subtotal: number;
+  packaging: number;
+  total: number;
+  message: string;
+};
+
 const modes: { id: OrderMode; label: string; description: string; icon: typeof ShoppingBag }[] = [
   {
     id: "emporter",
@@ -76,11 +109,13 @@ function OrderPage() {
     mode: OrderMode;
     message: string;
   } | null>(null);
+  const [preview, setPreview] = useState<OrderPreview | null>(null);
 
   const packaging = mode === "emporter" ? PACKAGING_FEE : 0;
   const total = subtotal + packaging;
   const suggestions = menuItems.filter((item) => !detailed.some((l) => l.item.id === item.id)).slice(0, 4);
 
+  // Étape d'aperçu : le message WhatsApp est généré depuis le panier avant tout envoi.
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
     const parsed = checkoutSchema.safeParse(form);
@@ -95,7 +130,8 @@ function OrderPage() {
     }
     setErrors({});
     const ref = `AV-${Math.floor(1000 + Math.random() * 9000)}`;
-    const message = buildOrderMessage({
+    const lines = detailed.map(({ item, qty }) => ({ name: item.name, qty, price: item.price }));
+    const payload = {
       ref,
       mode,
       name: parsed.data.name,
@@ -103,15 +139,31 @@ function OrderPage() {
       time: parsed.data.time,
       table: parsed.data.table,
       notes: parsed.data.notes,
-      lines: detailed.map(({ item, qty }) => ({ name: item.name, qty, price: item.price })),
+      lines,
       subtotal,
       packaging,
       total,
-    });
-    openWhatsApp(message);
-    setConfirmed({ ref, total, mode, message });
+    };
+    setPreview({ ...payload, message: buildOrderMessage(payload) });
+  };
+
+  const confirmSend = () => {
+    if (!preview) return;
+    openWhatsApp(preview.message);
+    setConfirmed({ ref: preview.ref, total: preview.total, mode: preview.mode, message: preview.message });
+    setPreview(null);
     clear();
     setForm({ name: "", phone: "", time: "", table: "", notes: "" });
+  };
+
+  const copyMessage = async () => {
+    if (!preview) return;
+    try {
+      await navigator.clipboard.writeText(preview.message);
+      toast.success("Message copié");
+    } catch {
+      toast.error("Copie impossible sur cet appareil.");
+    }
   };
 
   if (confirmed) {

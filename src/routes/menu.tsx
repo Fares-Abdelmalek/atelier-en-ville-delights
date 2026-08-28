@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Plus, Info, ShoppingBag } from "lucide-react";
+import { Plus, Info, ShoppingBag, Download, Loader2 } from "lucide-react";
+import { downloadMenuPdf } from "@/lib/menu-pdf";
 import {
   dietTagLabels,
   formatDA,
@@ -55,6 +56,19 @@ function MenuPage() {
   const { add } = useCart();
   const [activeTags, setActiveTags] = useState<DietTag[]>([]);
   const [selected, setSelected] = useState<MenuItem | null>(null);
+  const [pdfLoading, setPdfLoading] = useState(false);
+
+  const handleDownloadPdf = async () => {
+    setPdfLoading(true);
+    try {
+      await downloadMenuPdf();
+      toast.success("Menu PDF téléchargé");
+    } catch {
+      toast.error("Le PDF n'a pas pu être généré. Réessayez.");
+    } finally {
+      setPdfLoading(false);
+    }
+  };
 
   const filtered = useMemo(
     () =>
@@ -84,6 +98,18 @@ function MenuPage() {
             Toutes nos viandes sont halal. Filtrez la carte selon vos préférences, consultez les détails de chaque plat
             et ajoutez vos envies au panier pour une commande à emporter ou sur place.
           </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={handleDownloadPdf}
+              disabled={pdfLoading}
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60"
+            >
+              {pdfLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+              Télécharger le menu (PDF)
+            </button>
+          </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-2">
             <span className="mr-1 text-sm font-medium text-foreground">Filtres :</span>
