@@ -439,6 +439,125 @@ function OrderPage() {
           </aside>
         </div>
       </section>
+      <Dialog open={!!preview} onOpenChange={(open) => !open && setPreview(null)}>
+        <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="font-serif text-2xl font-medium">Aperçu de la commande</DialogTitle>
+            <DialogDescription>
+              Vérifiez le message WhatsApp pré-rempli avant de l'envoyer au gérant.
+            </DialogDescription>
+          </DialogHeader>
+
+          {preview && (
+            <div className="mt-2 space-y-5">
+              <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-secondary/50 p-4">
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground">Référence</p>
+                  <p className="font-semibold text-foreground">{preview.ref}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground">Type</p>
+                  <p className="font-semibold text-foreground">
+                    {preview.mode === "emporter" ? "À emporter" : "Sur place"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground">Client</p>
+                  <p className="font-medium text-foreground">{preview.name}</p>
+                  <p className="text-sm text-muted-foreground">{preview.phone}</p>
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                    {preview.mode === "emporter" ? "Heure de retrait" : "Heure d'arrivée"}
+                  </p>
+                  <p className="font-medium text-foreground">{preview.time}</p>
+                  {preview.table && (
+                    <p className="text-sm text-muted-foreground">Table {preview.table}</p>
+                  )}
+                </div>
+              </div>
+
+              {preview.notes && (
+                <div className="rounded-xl border border-border bg-secondary/50 p-4">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground">Notes</p>
+                  <p className="text-sm text-foreground">{preview.notes}</p>
+                </div>
+              )}
+
+              <div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground">Articles</p>
+                <ul className="mt-2 divide-y divide-border rounded-xl border border-border bg-card">
+                  {preview.lines.map((line) => (
+                    <li key={line.name} className="flex items-center justify-between p-4">
+                      <div>
+                        <p className="font-medium text-foreground">
+                          {line.qty}× {line.name}
+                        </p>
+                        <p className="text-sm text-muted-foreground">{formatDA(line.price)} l'unité</p>
+                      </div>
+                      <span className="font-serif text-foreground">{formatDA(line.price * line.qty)}</span>
+                    </li>
+                  ))}
+                </ul>
+                <dl className="mt-3 space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <dt className="text-muted-foreground">Sous-total</dt>
+                    <dd className="text-foreground">{formatDA(preview.subtotal)}</dd>
+                  </div>
+                  <div className="flex justify-between">
+                    <dt className="text-muted-foreground">
+                      {preview.mode === "emporter" ? "Emballage" : "Service à table"}
+                    </dt>
+                    <dd className="text-foreground">
+                      {preview.packaging === 0 ? "Offert" : formatDA(preview.packaging)}
+                    </dd>
+                  </div>
+                  <div className="flex justify-between border-t border-border pt-2">
+                    <dt className="font-semibold text-foreground">Total</dt>
+                    <dd className="font-serif text-xl font-medium text-foreground">{formatDA(preview.total)}</dd>
+                  </div>
+                </dl>
+              </div>
+
+              <div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground">Message WhatsApp</p>
+                <pre className="mt-2 max-h-48 overflow-y-auto whitespace-pre-wrap rounded-xl border border-border bg-secondary/50 p-4 text-sm leading-relaxed text-foreground">
+                  {preview.message}
+                </pre>
+              </div>
+
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <button
+                  type="button"
+                  onClick={confirmSend}
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Envoyer sur WhatsApp
+                </button>
+                <button
+                  type="button"
+                  onClick={copyMessage}
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-input bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+                >
+                  <Copy className="h-4 w-4" />
+                  Copier le texte
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPreview(null)}
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-input bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+                >
+                  Modifier
+                </button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
