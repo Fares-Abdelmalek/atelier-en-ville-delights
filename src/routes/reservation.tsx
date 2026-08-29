@@ -3,6 +3,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { CheckCircle2, Clock, MessageCircle, Phone, Users } from "lucide-react";
 import { buildReservationMessage, openWhatsApp, whatsappUrl } from "@/lib/whatsapp";
+import { breadcrumbSchema, SITE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/reservation")({
   component: ReservationPage,
@@ -21,6 +22,19 @@ export const Route = createFileRoute("/reservation")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: `${SITE_URL}/reservation` },
+    ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/reservation` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          breadcrumbSchema([
+            { name: "Accueil", path: "/" },
+            { name: "Réserver", path: "/reservation" },
+          ]),
+        ),
+      },
     ],
   }),
 });

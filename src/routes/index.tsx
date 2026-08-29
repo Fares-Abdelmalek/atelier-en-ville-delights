@@ -21,6 +21,7 @@ import {
 
 import foodSpread from "../assets/food-spread.jpg";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { restaurantSchema, SITE_URL } from "@/lib/seo";
 import { restaurantInteriorImage, terraceImage } from "@/lib/images";
 
 export const Route = createFileRoute("/")({
