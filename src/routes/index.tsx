@@ -21,6 +21,7 @@ import {
 
 import foodSpread from "../assets/food-spread.jpg";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { restaurantSchema, SITE_URL } from "@/lib/seo";
 import { restaurantInteriorImage, terraceImage } from "@/lib/images";
 
 export const Route = createFileRoute("/")({
@@ -43,7 +44,10 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(restaurantSchema) },
+    ],
   }),
 });
 

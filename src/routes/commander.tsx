@@ -24,6 +24,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+import { breadcrumbSchema, SITE_URL } from "@/lib/seo";
+
 export const Route = createFileRoute("/commander")({
   component: OrderPage,
   head: () => ({
@@ -41,6 +43,19 @@ export const Route = createFileRoute("/commander")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: `${SITE_URL}/commander` },
+    ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/commander` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          breadcrumbSchema([
+            { name: "Accueil", path: "/" },
+            { name: "Commander", path: "/commander" },
+          ]),
+        ),
+      },
     ],
   }),
 });

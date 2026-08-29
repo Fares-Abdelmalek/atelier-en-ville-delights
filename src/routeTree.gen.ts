@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CommanderRouteImport } from './routes/commander'
 import { Route as MenuRouteImport } from './routes/menu'
 import { Route as ReservationRouteImport } from './routes/reservation'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const ReservationRoute = ReservationRouteImport.update({
   path: '/reservation',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/commander': typeof CommanderRoute
   '/menu': typeof MenuRoute
   '/reservation': typeof ReservationRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/commander': typeof CommanderRoute
   '/menu': typeof MenuRoute
   '/reservation': typeof ReservationRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,15 @@ export interface FileRoutesById {
   '/commander': typeof CommanderRoute
   '/menu': typeof MenuRoute
   '/reservation': typeof ReservationRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/commander' | '/menu' | '/reservation'
+  fullPaths: '/' | '/commander' | '/menu' | '/reservation' | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/commander' | '/menu' | '/reservation'
-  id: '__root__' | '/' | '/commander' | '/menu' | '/reservation'
+  to: '/' | '/commander' | '/menu' | '/reservation' | '/sitemap.xml'
+  id:
+    '__root__' | '/' | '/commander' | '/menu' | '/reservation' | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +77,7 @@ export interface RootRouteChildren {
   CommanderRoute: typeof CommanderRoute
   MenuRoute: typeof MenuRoute
   ReservationRoute: typeof ReservationRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +110,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReservationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +125,7 @@ const rootRouteChildren: RootRouteChildren = {
   CommanderRoute: CommanderRoute,
   MenuRoute: MenuRoute,
   ReservationRoute: ReservationRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

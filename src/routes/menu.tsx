@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Plus, Info, ShoppingBag, Download, Loader2 } from "lucide-react";
 import { downloadMenuPdf } from "@/lib/menu-pdf";
+import { breadcrumbSchema, menuSchema, SITE_URL } from "@/lib/seo";
 import {
   dietTagLabels,
   formatDA,
@@ -38,6 +39,20 @@ export const Route = createFileRoute("/menu")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: `${SITE_URL}/menu` },
+    ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/menu` }],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(menuSchema) },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          breadcrumbSchema([
+            { name: "Accueil", path: "/" },
+            { name: "Menu", path: "/menu" },
+          ]),
+        ),
+      },
     ],
   }),
 });
