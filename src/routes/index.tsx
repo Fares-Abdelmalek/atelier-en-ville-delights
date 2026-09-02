@@ -22,7 +22,7 @@ import {
 import foodSpread from "../assets/food-spread.jpg";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
 import { restaurantSchema, SITE_URL } from "@/lib/seo";
-import { restaurantInteriorImage, terraceImage } from "@/lib/images";
+import { logoImage, restaurantInteriorImage, terraceImage } from "@/lib/images";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -41,7 +41,9 @@ export const Route = createFileRoute("/")({
           "Restaurant, café et cocktails à Tizi Ouzou. Cuisine halal, terrasse, service à table et ambiance chaleureuse.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: `${SITE_URL}${logoImage.url}` },
+      { name: "twitter:image", content: `${SITE_URL}${logoImage.url}` },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/` }],

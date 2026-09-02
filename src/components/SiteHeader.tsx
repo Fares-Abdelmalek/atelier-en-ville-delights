@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/cart";
+import { logoImage } from "@/lib/images";
 
 const links = [
   { label: "Accueil", to: "/" as const },
@@ -15,8 +16,11 @@ export function SiteHeader() {
   return (
     <header className="sticky inset-x-0 top-0 z-50 border-b border-border/50 bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-12">
-        <Link to="/" className="font-serif text-lg font-semibold tracking-tight text-foreground sm:text-xl">
-          L'Atelier en Ville
+        <Link to="/" className="flex items-center gap-2.5">
+          <img src={logoImage.url} alt={logoImage.alt} width={36} height={36} className="h-9 w-9 rounded-full object-cover" />
+          <span className="font-serif text-lg font-semibold tracking-tight text-foreground sm:text-xl">
+            L'Atelier en Ville
+          </span>
         </Link>
         <nav className="hidden items-center gap-7 md:flex">
           {links.map((link) => (
