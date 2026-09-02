@@ -83,8 +83,15 @@ export const terraceImage: ResponsiveImageSource = {
 };
 
 import logoAsset from "../assets/logo-atelier-en-ville.jpg.asset.json";
+import qrCodeAsset from "../assets/qrcode-atelier-en-ville.png.asset.json";
 
 export const logoImage = {
   url: logoAsset.url,
   alt: "Logo de L'Atelier en Ville, restaurant, café et cocktails à Tizi Ouzou",
+};
+
+export const qrCodeImage = {
+  url: qrCodeAsset.url,
+  alt: "QR code pour accéder au site de L'Atelier en Ville, restaurant à Tizi Ouzou",
+  caption: "Scannez ce QR code pour ouvrir le site web de L'Atelier en Ville.",
 };
