@@ -22,7 +22,7 @@ import {
 import foodSpread from "../assets/food-spread.jpg";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
 import { restaurantSchema, SITE_URL } from "@/lib/seo";
-import { restaurantInteriorImage, terraceImage } from "@/lib/images";
+import { logoImage, restaurantInteriorImage, terraceImage } from "@/lib/images";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -41,7 +41,9 @@ export const Route = createFileRoute("/")({
           "Restaurant, café et cocktails à Tizi Ouzou. Cuisine halal, terrasse, service à table et ambiance chaleureuse.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: `${SITE_URL}${logoImage.url}` },
+      { name: "twitter:image", content: `${SITE_URL}${logoImage.url}` },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/` }],
@@ -115,7 +117,15 @@ function Index() {
           {/* Content side */}
           <div className="order-1 flex flex-col justify-center px-5 sm:px-8 lg:px-12 lg:order-2 lg:pl-16 xl:pl-24">
             <div className="mx-auto w-full max-w-xl py-16 lg:py-0">
+              <img
+                src={logoImage.url}
+                alt={logoImage.alt}
+                width={112}
+                height={112}
+                className="mb-6 h-24 w-24 rounded-full object-cover shadow-lg ring-1 ring-border sm:h-28 sm:w-28"
+              />
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5">
+
                 <span className="flex h-2 w-2 rounded-full bg-green-500" />
                 <span className="text-xs font-medium text-muted-foreground">Ouvert · Ferme à 23:00</span>
               </div>

@@ -81,3 +81,10 @@ export const terraceImage: ResponsiveImageSource = {
   caption:
     "Cadre agréable et branché de L'Atelier en Ville : coin salon confortable pour un café, un thé ou un cocktail à Tizi Ouzou.",
 };
+
+import logoAsset from "../assets/logo-atelier-en-ville.jpg.asset.json";
+
+export const logoImage = {
+  url: logoAsset.url,
+  alt: "Logo de L'Atelier en Ville, restaurant, café et cocktails à Tizi Ouzou",
+};
